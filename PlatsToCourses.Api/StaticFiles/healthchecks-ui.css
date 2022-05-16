@@ -1,0 +1,5 @@
+:root {
+	--primaryColor: #5ec297 !important;
+	--bgImageLigthen: linear-gradient( rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) ) !important;
+	--logoImageUrl: url('../../StaticFiles/cargo.png')
+}

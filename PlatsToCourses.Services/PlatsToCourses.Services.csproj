@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Configurations>Debug;Release;INT;Prod;azuread</Configurations>
+	  <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='azuread|AnyCPU'">
+    <DefineConstants>TRACE;azuread</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include=".template.config\ide.host.json" />
+    <Content Include=".template.config\template.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PlatsToCourses.Common\PlatsToCourses.Common.csproj" />
+    <ProjectReference Include="..\PlatsToCourses.Data\PlatsToCourses.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="CommonPackages.Jwt" Version="1.0.2" />
+    <PackageReference Include="CommonPackages.Ldap" Version="2.1.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.17.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Graph" Version="4.0.0" />
+    <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.7" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.16.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enum\" />
+  </ItemGroup>
+
+</Project>

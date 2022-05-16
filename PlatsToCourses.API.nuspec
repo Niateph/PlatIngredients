@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>PlatsToCourses.Api.Templates</id>
+    <version>0.0.1</version>
+    <description>Mdeles de projet WEB API C#.</description>
+    <authors>CARGO</authors>
+    <title>Templates Mdeles de projet WEB API</title>
+    <copyright>Copyright 2021: CARGO</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>.NET WebApi Templates</tags>
+    <projectUrl>https://devops.intranoo.fr/DefaultCollection/_git/(Interne).PlatsToCourses</projectUrl>
+	<packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+  </metadata>
+  <files>
+    <file src="**" exclude="**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json;_rels\**\*;package\**\*" />
+  </files>
+</package>
