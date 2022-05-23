@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 using PlatsToCourses.Data.Entities;
+
 
 #nullable disable
 
@@ -25,10 +25,12 @@ public partial class BDDPlatsToCoursesContext : DbContext
 
 	public virtual DbSet<Ingredient> Ingredients { get; set; }
 
+	public virtual DbSet<PlatIngredient> PlatIngredients { get; set; }
+
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
-
+		optionsBuilder.EnableSensitiveDataLogging();
 	}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -52,6 +54,8 @@ public partial class BDDPlatsToCoursesContext : DbContext
 				.IsRequired()
 				.HasMaxLength(256)
 				.IsUnicode(false);
+
+			entity.HasData(new Setting { Id = 1, Key = "MonSetting", Value = "Bleu" }, new Setting { Id = 2, Key = "UserDocumentation", Value = "https://www.mon-intranoo.fr/transverse/procedures/OUTILS/MyPLM/Documents/Forms/AllItems.aspx" });
 		});
 
 		modelBuilder.Entity<ProfileADGroup>(entity =>
@@ -64,24 +68,47 @@ public partial class BDDPlatsToCoursesContext : DbContext
 				.IsRequired()
 				.HasMaxLength(100)
 				.IsUnicode(false);
-		});
 
-		this.OnModelCreatingPartial(modelBuilder);
-
-		modelBuilder.Entity<Plat>(entity =>
-		{
-			entity.ToTable("T_Plat");
-			entity.Property(e => e.Id).ValueGeneratedOnAdd();
-			entity.Property(e => e.Nom)
-			.IsRequired()
-			.HasMaxLength(100);
+			entity.HasData(new ProfileADGroup { Id = 2, ADGroupName = "GROUP_AD_USER", ProfileId = Common.ProfileEnum.User }, new ProfileADGroup { Id = 3, ADGroupName = "ROLDAN_PLM_SU", ProfileId = Common.ProfileEnum.Administrator }, new ProfileADGroup { Id = 4, ADGroupName = "GROUP_AD_READONLY", ProfileId = Common.ProfileEnum.ReadOnly });
 		});
 
 		modelBuilder.Entity<Ingredient>(entity =>
 		{
 			entity.ToTable("T_Ingredient");
-			entity.Property(e => e.Id).ValueGeneratedOnAdd();
+			entity.Property(e => e.IngredientId).ValueGeneratedOnAdd();
+			entity.Property(e => e.Nom)
+			.IsRequired()
+			.HasMaxLength(50);
+			entity.Property(e => e.Prix)
+			.HasMaxLength(10);
+			entity.Property(e => e.Unit)
+			.HasMaxLength(10);
 		});
+
+		modelBuilder.Entity<PlatIngredient>(entity =>
+		{
+			entity.ToTable("T_PlatIngredient");
+			entity.HasKey(pi => new { pi.PlatId, pi.IngredientId });
+			entity.Property(e => e.Amount)
+			.HasDefaultValue(0)
+			.HasMaxLength(10);
+			entity.Property(e => e.Unit)
+			.HasDefaultValue("")
+			.HasMaxLength(10);
+			entity.HasKey(pi=> new { pi.PlatId, pi.IngredientId });	
+		});
+
+		modelBuilder.Entity<Plat>(entity =>
+		{
+			entity.ToTable("T_Plat");
+			entity.Property(e => e.PlatId).ValueGeneratedOnAdd();
+			entity.Property(e => e.Nom)
+			.IsRequired()
+			.HasMaxLength(50);
+		});
+
+
+		this.OnModelCreatingPartial(modelBuilder);
 	}
 
 	partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

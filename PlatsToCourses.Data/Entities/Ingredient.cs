@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace PlatsToCourses.Data.Entities;
 
-namespace PlatsToCourses.Data.Entities
-{
 	public class Ingredient
 	{
-		public int Id { get; set; }
-		public string Name { get; set; }	
+		public int IngredientId { get; set; }
+		public string Nom { get; set; }
+		public float Prix { get; set; }
+		public string Unit { get; set; }
+		public  ICollection<PlatIngredient> PlatIngredients { get; set; } 
 	}
-}
+

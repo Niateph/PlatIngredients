@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using CommonPackages.Jwt.Infrastructure;
 using CommonPackages.Ldap.Infrastructure;
@@ -47,7 +48,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddDbContext<BDDPlatsToCoursesContext>(options => options
-	.UseSqlServer(builder.Configuration.GetConnectionString(AppSettings.ConnectionString)));
+	.UseSqlServer(builder.Configuration.GetConnectionString(AppSettings.ConnectionString)).LogTo(log=>Debug.WriteLine(log)));
 
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(SettingProfile)));
 builder.Services.AddControllers();
@@ -167,5 +168,4 @@ void AddBusinessServices(IServiceCollection services)
 	services.AddScoped<ILogService, LogService>();
 	services.AddScoped<ISettingService, SettingService>();
 	services.AddScoped<IPlatService, PlatService>();
-
 }

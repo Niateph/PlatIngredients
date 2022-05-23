@@ -4,10 +4,10 @@ namespace PlatsToCourses.Services
 {
 	public interface IPlatService
 	{
-		List<PlatDto> GetAll();
-		Plat AddOne(PlatDto plat);
+		List<PlatDto> GetAll(int page, int nbByPage);
+		Plat AddOne(PlatNewDto plat);
 
-		Plat RemoveOne(PlatDto plats);
+		bool DeleteOne(int id);
 
 		Plat UpdateOne(PlatDto plats);
 	}

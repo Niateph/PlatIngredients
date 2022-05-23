@@ -1,7 +1,8 @@
-﻿namespace PlatsToCourses.Services
+﻿using PlatsToCourses.Data.Entities;
+
+namespace PlatsToCourses.Services;
+public interface IIngredientService
 {
-	public interface IIngredientService
-	{
-		List<IngredientDto> GetAll();
-	}
+	List<IngredientListeDto> GetAll(int page, int nbByPage);
+	Ingredient AddOne(IngredientNewDto ingredientToAdd);
 }

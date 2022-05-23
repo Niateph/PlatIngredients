@@ -25,16 +25,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="CommonPackages.Jwt" Version="1.0.2" />
-    <PackageReference Include="CommonPackages.Ldap" Version="2.1.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.17.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="CommonPackages.Jwt" Version="1.0.3" />
+    <PackageReference Include="CommonPackages.Ldap" Version="2.1.11" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Graph" Version="4.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Graph" Version="4.29.0" />
     <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.7" />
-    <PackageReference Include="Microsoft.Identity.Web" Version="1.16.0" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.24.1" />
   </ItemGroup>
 
   <ItemGroup>

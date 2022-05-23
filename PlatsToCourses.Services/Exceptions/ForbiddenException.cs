@@ -5,4 +5,4 @@ namespace PlatsToCourses.Services.Exceptions;
 public class ForbiddenException : Exception
 {
         
-    }
+}
