@@ -26,12 +26,12 @@ builder.Services.Configure<ApplicationOptions>(builder.Configuration.GetSection(
 
 
 // Add azure telemetry
-/*builder.Services.AddSingleton<ITelemetryInitializer, EnrichedTelemetry>();
+builder.Services.AddSingleton<ITelemetryInitializer, EnrichedTelemetry>();
 builder.Services.AddApplicationInsightsTelemetry();
 builder.Services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>((module, o) =>
 {
 	module.EnableSqlCommandTextInstrumentation = false;
-});*/
+});
 
 // Add CORS policy
 builder.Services.AddCors(options =>
@@ -112,14 +112,14 @@ builder.Services.AddJwtService(builder.Configuration)
 			x.TokenValidationParameters = TokenValidationParametersHelper.Create(builder.Configuration);
 		});
 
-/*builder.Services.AddHealthChecks().AddUrlGroup(new Uri("https://localhost:44352/api/Version"),
+builder.Services.AddHealthChecks().AddUrlGroup(new Uri("https://localhost:44352/api/Version"),
 				  name: "API Check",
 				  failureStatus: HealthStatus.Degraded)
-			  .AddSqlServer(builder.Configuration.GetConnectionString(AppSettings.ConnectionString), name: "Database check");*/
+			  .AddSqlServer(builder.Configuration.GetConnectionString(AppSettings.ConnectionString), name: "Database check");
 
 // Si besoin healthchecks dans Azure
 //.AddApplicationInsightsPublisher();
-/*builder.Services.AddHealthChecksUI().AddInMemoryStorage();*/
+builder.Services.AddHealthChecksUI().AddInMemoryStorage();
 
 var app = builder.Build();
 
@@ -149,14 +149,14 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
 	endpoints.MapControllers();
-	/*endpoints.MapHealthChecksUI(setup =>
+	endpoints.MapHealthChecksUI(setup =>
 	{
 		setup.AddCustomStylesheet("StaticFiles/healthchecks-ui.css");
 	});
 	endpoints.MapHealthChecks("/health", new HealthCheckOptions()
 	{
 		ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-	});*/
+	});
 });
 
 app.Run();

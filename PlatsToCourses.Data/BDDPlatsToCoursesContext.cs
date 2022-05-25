@@ -75,6 +75,7 @@ public partial class BDDPlatsToCoursesContext : DbContext
 		modelBuilder.Entity<Ingredient>(entity =>
 		{
 			entity.ToTable("T_Ingredient");
+			entity.Property(e => e.IngredientId).ValueGeneratedOnAdd();
 			entity.Property(e => e.Nom)
 			.IsRequired()
 			.HasMaxLength(50);
@@ -84,31 +85,28 @@ public partial class BDDPlatsToCoursesContext : DbContext
 			.HasMaxLength(10);
 		});
 
+		modelBuilder.Entity<PlatIngredient>(entity =>
+		{
+			entity.ToTable("T_PlatIngredient");
+			entity.HasKey(pi => new { pi.PlatId, pi.IngredientId });
+			entity.Property(e => e.Amount)
+			.HasDefaultValue(0)
+			.HasMaxLength(10);
+			entity.Property(e => e.Unit)
+			.HasDefaultValue("")
+			.HasMaxLength(10);
+			entity.HasKey(pi=> new { pi.PlatId, pi.IngredientId });	
+		});
 
 		modelBuilder.Entity<Plat>(entity =>
 		{
 			entity.ToTable("T_Plat");
+			entity.Property(e => e.PlatId).ValueGeneratedOnAdd();
 			entity.Property(e => e.Nom)
 			.IsRequired()
 			.HasMaxLength(50);
 		});
 
-		modelBuilder.Entity<PlatIngredient>().ToTable("T_PlatIngredient");
-
-		modelBuilder.Entity<PlatIngredient>().HasKey(pi => new { pi.PlatId, pi.IngredientId });
-
-
-		modelBuilder.Entity<PlatIngredient>()
-			.HasOne(pi => pi.Plat)
-			.WithMany(pi => pi.PlatIngredients)
-			.HasForeignKey(pi => pi.PlatId);
-		modelBuilder.Entity<PlatIngredient>()
-			.HasOne(pi => pi.Ingredient)
-			.WithMany(pi => pi.PlatIngredients)
-			.HasForeignKey(pi => pi.IngredientId);
-
-		modelBuilder.Entity<PlatIngredient>().Property(pi => pi.Amount).HasDefaultValue(0).HasMaxLength(10);
-		modelBuilder.Entity<PlatIngredient>().Property(pi => pi.Unit).HasDefaultValue("").HasMaxLength(10);	
 
 		this.OnModelCreatingPartial(modelBuilder);
 	}

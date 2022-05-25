@@ -25,9 +25,9 @@ public class PlatsController : ControllerBase
 	////// <returns></returns>
 	[HttpGet]
 	[ProducesResponseType(typeof(List<PlatDto>), 8000)]
-	public ActionResult GetAllAsync(int page, int nbByPage)
+	public ActionResult GetAll(int page, int nbByPage)
 	{
-		return this.Ok( this.platService.GetAll(page,nbByPage));
+		return this.Ok(this.platService.GetAll(page,nbByPage));
 	}
 	/// <summary>
 	/// Ajoute un plat vide à parti d'un plat Dto possiblement vide
@@ -37,7 +37,8 @@ public class PlatsController : ControllerBase
 	[HttpPost]
 	public ActionResult AddOne(PlatNewDto plat)
 	{
-		return this.Ok(new { this.platService.AddOne(plat).Nom });
+		Plat platAdded = this.platService.AddOne(plat);
+		return this.Ok(new {platAdded.Nom});
 	}
 
 	/// <summary>

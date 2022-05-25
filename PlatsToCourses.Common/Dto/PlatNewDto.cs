@@ -3,5 +3,5 @@ public class PlatNewDto
 {
 	public int Id { get; set; }
 	public string Nom { get; set; }
-	public List<IngredientNewDto> IngredientDtos { get; set; } = new ();
+	public List<IngredientNewDto> IngredientDtos { get; set; }
 }
