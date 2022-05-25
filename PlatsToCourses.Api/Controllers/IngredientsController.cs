@@ -10,13 +10,13 @@ namespace PlatsToCourses.Api.Controllers;
 [Route("api/[controller]")]
 //[Authorize]
 
-public class PlatsController : ControllerBase
+public class IngredientsController : ControllerBase
 {
-	readonly IPlatService platService;
+	readonly IIngredientService ingredientService;
 
-	public PlatsController(IPlatService platService)
+	public IngredientsController(IIngredientService ingredientService)
 	{
-		this.platService = platService;
+		this.ingredientService = ingredientService;
 	}
 
 	/// <summary>
@@ -24,20 +24,20 @@ public class PlatsController : ControllerBase
 	/// </summary>
 	////// <returns></returns>
 	[HttpGet]
-	[ProducesResponseType(typeof(List<PlatDto>), 8000)]
-	public ActionResult GetAllAsync(int page, int nbByPage)
+	[ProducesResponseType(typeof(List<IngredientListeDto>), 8000)]
+	public ActionResult GetAll(int page, int nbByPage)
 	{
-		return this.Ok( this.platService.GetAll(page,nbByPage));
+		return this.Ok(this.ingredientService.GetAll(page,nbByPage));
 	}
 	/// <summary>
 	/// Ajoute un plat vide à parti d'un plat Dto possiblement vide
 	/// </summary>
-	/// <param name="plat"> plat DTO</param>
+	/// <param name="ingredient"> plat DTO</param>
 	/// <returns></returns>
 	[HttpPost]
-	public ActionResult AddOne(PlatNewDto plat)
+	public ActionResult AddOne(IngredientNewDto ingredient)
 	{
-		return this.Ok(new { this.platService.AddOne(plat).Nom });
+		return this.Ok(new { this.ingredientService.AddOne(ingredient).Nom });
 	}
 
 	/// <summary>
@@ -48,16 +48,16 @@ public class PlatsController : ControllerBase
 	[HttpDelete]
 	public ActionResult DeletOne(int Id)
 	{
-		return this.Ok(this.platService.DeleteOne(Id));
+		return this.Ok(this.ingredientService.DeleteOne(Id));
 	}
 	/// <summary>
 	/// Met à jour un plat dans la table en fonction de l'id du platDto 
 	/// </summary>
-	/// <param name="plat"></param>
+	/// <param name="ingredientToUpdate"></param>
 	/// <returns></returns>
 	[HttpPut]
-	public ActionResult UpdateOne(PlatDto plat)
+	public ActionResult UpdateOne(IngredientNewDto ingredientToUpdate)
 	{
-		return this.Ok(this.platService.UpdateOne(plat));
+		return this.Ok(this.ingredientService.UpdateOne(ingredientToUpdate));
 	}
 }
